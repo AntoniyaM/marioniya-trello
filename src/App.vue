@@ -5,11 +5,15 @@ import Navbar from '@/components/Navbar.vue';
 
 <template>
   <header>
-    <img alt="Marioniya logo" class="logo" src="@/assets/images/marioniya-logo.png" width="300" height="300" />
+    <RouterLink to="/">
+      <img alt="Marioniya logo" class="logo" src="@/assets/images/marioniya-logo.png" width="300" height="300" />
+    </RouterLink>
     <Navbar />
   </header>
 
   <main>
-    <RouterView />
+    <Suspense>
+      <RouterView />
+    </Suspense>
   </main>
 </template>

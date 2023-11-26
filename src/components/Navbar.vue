@@ -1,11 +1,34 @@
 <template>
   <div class="navbar">
-    <BaseButton icon="pi pi-user" :label="user ? 'Log out' : 'Log in'" />
+    <template v-if="user?.email">
+      <span class="navbar__info">
+        {{ user.email }}
+      </span>
+      <BaseButton label="Log out" @click="logout" />
+    </template>
+    <RouterLink v-else to="/login" class="p-button">
+      <i class="pi pi-user"></i>
+      Log in
+    </RouterLink>
   </div>
 </template>
 
 <script setup>
-import { useFirebaseAuth } from 'vuefire';
+import { useFirebaseAuth, useCurrentUser } from 'vuefire';
+import { signOut } from 'firebase/auth';
+import { useRouter } from 'vue-router';
 
-const user = useFirebaseAuth().currentUser;
+const auth = useFirebaseAuth();
+const user = useCurrentUser();
+const router = useRouter();
+
+const logout = async () => {
+  await signOut(auth)
+      .then(() => {
+        router.push('/login');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+}
 </script>
