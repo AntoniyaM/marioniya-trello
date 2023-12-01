@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar.vue';
 <template>
   <header>
     <RouterLink to="/">
-      <img alt="Marioniya logo" class="logo" src="@/assets/images/marioniya-logo.png" width="300" height="300" />
+      <img alt="Marioniya logo" class="logo" src="@/assets/images/marioniya-logo.svg" width="300" height="300" />
     </RouterLink>
     <Navbar />
   </header>

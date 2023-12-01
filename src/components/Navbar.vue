@@ -2,7 +2,7 @@
   <div class="navbar">
     <template v-if="user?.email">
       <span class="navbar__info">
-        {{ user.email }}
+        <strong>{{ user.email }}</strong>
       </span>
       <BaseButton label="Log out" @click="logout" />
     </template>
