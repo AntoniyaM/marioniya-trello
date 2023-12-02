@@ -17,9 +17,10 @@
 import { useFirebaseAuth, useCurrentUser } from 'vuefire';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const auth = useFirebaseAuth();
-const user = useCurrentUser();
+const user = ref(useCurrentUser());
 const router = useRouter();
 
 const logout = async () => {

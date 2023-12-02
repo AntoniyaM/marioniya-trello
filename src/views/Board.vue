@@ -7,16 +7,16 @@
 </template>
 
 <script setup>
-import { useCurrentUser } from 'vuefire';
-import { onMounted } from 'vue';
+import { getCurrentUser } from 'vuefire';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-const user = await useCurrentUser();
+const user = ref(await getCurrentUser());
 const router = useRouter();
 
 // If user is not logged in, redirect to login page.
 onMounted(() => {
-  if (!user.value) {
+  if (!user.value?.email) {
     router.push('/login');
   }
 });

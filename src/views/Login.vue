@@ -29,8 +29,8 @@
 
 <script setup>
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useFirebaseAuth } from 'vuefire';
-import { ref } from 'vue';
+import { getCurrentUser, useFirebaseAuth } from 'vuefire';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const userInput = ref({
@@ -40,11 +40,18 @@ const userInput = ref({
 
 const auth = useFirebaseAuth();
 const router = useRouter();
+const user = ref(await getCurrentUser());
+
+// If user is already logged in, redirect to board.
+onMounted(() => {
+  if (user.value !== null) {
+    router.push('/');
+  }
+});
 
 const login = async () => {
   await signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
-      .then((user) => {
-        console.log(user);
+      .then(() => {
         router.push('/');
       })
       .catch((error) => {
