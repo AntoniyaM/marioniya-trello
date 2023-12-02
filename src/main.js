@@ -8,6 +8,7 @@ import { firebaseApp } from '@/firebase';
 // PrimeVue.
 import PrimeVue from 'primevue/config';
 import Button from 'primevue/button';
+import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 
@@ -26,6 +27,7 @@ app.use(PrimeVue, { ripple: true });
 
 // Component registration.
 app.component('BaseButton', Button);
+app.component('Card', Card);
 app.component('InputText', InputText);
 app.component('InputPassword', Password);
 

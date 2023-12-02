@@ -1,11 +1,30 @@
 <template>
-  <form @submit.prevent="login">
-    <label for="email">Email</label>
-    <InputText id="email" v-model="userInput.email" />
-    <label for="password">Password</label>
-    <InputPassword v-model="userInput.password" :feedback="false" />
-    <input type="submit" class="p-button" value="Log in">
-  </form>
+  <Card class="login">
+    <template #title>Login</template>
+    <template #content>
+      <form @submit.prevent="login" class="form">
+        <div class="form-item">
+          <label for="email">Email</label>
+          <InputText
+              id="email"
+              v-model="userInput.email"
+              placeholder="shrimply.pibbles@pieceamongworlds.com"
+              required />
+        </div>
+        <div class="form-item">
+          <label for="password">Password</label>
+          <InputPassword
+              id="password"
+              v-model="userInput.password"
+              :feedback="false"
+              required />
+        </div>
+        <div class="form-item form-item--submit">
+          <input type="submit" class="p-button" value="Log in">
+        </div>
+      </form>
+    </template>
+  </Card>
 </template>
 
 <script setup>
