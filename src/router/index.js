@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/Login.vue';
 import Board from '@/views/Board.vue';
+import Task from '@/components/Task.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -9,6 +10,13 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Board,
+      children: [
+        {
+          path: 'task/:id',
+          name: 'task',
+          component: Task,
+        }
+      ]
     },
     {
       path: '/login',
