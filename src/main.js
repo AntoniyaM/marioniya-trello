@@ -27,7 +27,7 @@ app.use(PrimeVue, { ripple: true });
 
 // Component registration.
 app.component('BaseButton', Button);
-app.component('Card', Card);
+app.component('SwimLane', Card);
 app.component('InputText', InputText);
 app.component('InputPassword', Password);
 

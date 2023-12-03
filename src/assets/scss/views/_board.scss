@@ -1,0 +1,23 @@
+.board__swim-lanes {
+    @include bp(m) {
+        display: flex;
+        gap: 1em;
+    }
+}
+
+.swim-lane {
+    margin-bottom: 1em;
+    overflow: hidden;
+
+    @include bp(m) {
+        margin-bottom: 0;
+        flex: 1 0;
+    }
+}
+
+.swim-lane__name {
+    // Use the same spacer as the rest of the card parts.
+    padding: 1.25rem;
+    margin-bottom: 0;
+    background: var(--primary-50);
+}
