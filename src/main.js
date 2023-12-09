@@ -9,7 +9,10 @@ import { firebaseApp } from '@/firebase';
 import PrimeVue from 'primevue/config';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import DialogService from 'primevue/dialogservice';
+import DynamicDialog from 'primevue/dynamicdialog';
 import InputText from 'primevue/inputtext';
+import Panel from 'primevue/panel';
 import Password from 'primevue/password';
 
 import App from './App.vue';
@@ -24,11 +27,14 @@ app.use(VueFire, {
   modules: [VueFireAuth()],
 });
 app.use(PrimeVue, { ripple: true });
+app.use(DialogService);
 
 // Component registration.
 app.component('BaseButton', Button);
 app.component('SwimLane', Card);
+app.component('DynamicDialog', DynamicDialog);
 app.component('InputText', InputText);
+app.component('Panel', Panel);
 app.component('InputPassword', Password);
 
 app.mount('#app');

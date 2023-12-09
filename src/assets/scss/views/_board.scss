@@ -13,6 +13,11 @@
         margin-bottom: 0;
         flex: 1 0;
     }
+
+    // Remove superfluous padding coming from VuePrime.
+    .p-card-content {
+        padding: 0;
+    }
 }
 
 .swim-lane__name {

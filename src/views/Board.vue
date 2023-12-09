@@ -15,27 +15,20 @@
           </template>
           <template #content>
             <div class="swim-lane__task-list">
-              <RouterLink
+              <Panel
+                  :header="task.title"
                   class="task"
                   v-for="task in getTasksByLane(item.id)"
-                  :to="{ name: 'task', params: { id: task.id } }"
                   :key="task.id"
+                  @click="openTask(task.id)"
               >
-                <div class="task__title">
-                  <strong>{{ task.title }}</strong>
-                </div>
-                <div class="task__description">{{ task.description }}</div>
-              </RouterLink>
+                <div class="task__description">{{ task.description || '–' }}</div>
+              </Panel>
             </div>
           </template>
         </SwimLane>
       </div>
-      <div class="board__overlay"
-           v-if="showOverlay"
-           @click="closeOverlay"
-      >
-        <RouterView />
-      </div>
+      <DynamicDialog :pt="{ mask: { style: 'backdrop-filter: blur(2px)' } }" />
     </div>
   </div>
 </template>
@@ -43,28 +36,42 @@
 <script setup>
 import { getCurrentUser } from 'vuefire';
 import { ref, computed, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, RouterView } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
 import { storeToRefs } from 'pinia';
+import { useDialog } from 'primevue/usedialog';
 
 const user = ref(await getCurrentUser());
 const router = useRouter();
 const { swimLanes } = storeToRefs(useBoardStore());
 const { getTasksByLane } = useBoardStore();
+const dialog = useDialog();
 
-const showOverlay = computed(() => {
+const taskIsOpen = computed(() => {
   return router.currentRoute.value.name === 'task';
 });
 
+// Navigate to task (open in dialog).
+const openTask = (id) => {
+  router.push({ name: 'task', params: { id } });
+  dialog.open(RouterView, {
+    onClose: closeOverlay
+  });
+}
+
 // Close open task.
 const closeOverlay = () => {
-  router.push({ name: 'board' });
+  router.push('/');
 }
 
 // If user is not logged in, redirect to login page.
 onMounted(() => {
   if (!user.value?.email) {
     router.push('/login');
+  }
+
+  if (taskIsOpen.value) {
+    openTask(router.currentRoute.value.params.id);
   }
 });
 </script>
