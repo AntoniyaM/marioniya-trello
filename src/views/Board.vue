@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="board">
-      <h1>Mario & Antoniya's Trello Board</h1>
+      <div class="board__title">
+        <h1>Mario & Antoniya's Trello Board</h1>
+        <BaseButton icon="pi pi-plus" label="Create task" @click="addTask('add')" />
+      </div>
       <div class="board__swim-lanes">
         <SwimLane
             class="swim-lane"
@@ -38,13 +41,11 @@ import { getCurrentUser } from 'vuefire';
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, RouterView } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
-import { storeToRefs } from 'pinia';
 import { useDialog } from 'primevue/usedialog';
 
 const user = ref(await getCurrentUser());
 const router = useRouter();
-const { swimLanes } = storeToRefs(useBoardStore());
-const { getTasksByLane } = useBoardStore();
+const { swimLanes, getTasksByLane } = useBoardStore();
 const dialog = useDialog();
 
 const taskIsOpen = computed(() => {
@@ -55,7 +56,15 @@ const taskIsOpen = computed(() => {
 const openTask = (id) => {
   router.push({ name: 'task', params: { id } });
   dialog.open(RouterView, {
-    onClose: closeOverlay
+    onClose: closeOverlay,
+  });
+}
+
+// Open new task form in dialog.
+const addTask = () => {
+  router.push('/task/add');
+  dialog.open(RouterView, {
+    onClose: closeOverlay,
   });
 }
 

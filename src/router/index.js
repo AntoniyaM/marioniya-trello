@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/Login.vue';
 import Board from '@/views/Board.vue';
-import Task from '@/components/Task.vue';
+import TaskAdd from '@/components/TaskAdd.vue';
+import TaskEdit from '@/components/TaskEdit.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,7 +15,12 @@ const router = createRouter({
         {
           path: 'task/:id',
           name: 'task',
-          component: Task,
+          component: TaskEdit,
+        },
+        {
+          path: 'task/add',
+          name: 'new-task',
+          component: TaskAdd,
         }
       ]
     },

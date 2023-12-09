@@ -1,7 +1,7 @@
 import { ref } from 'vue';
-import { collection } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { useFirestore, useCollection } from 'vuefire';
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useBoardStore = defineStore('board', () => {
   // Board lanes.
@@ -31,6 +31,13 @@ export const useBoardStore = defineStore('board', () => {
 
   const getTaskById = (id) => {
     return tasks.value.find((task) => task.id === id);
+  }
+
+  // Actions.
+  const createTask = async (payload) => {
+    return await addDoc(collection(db, 'tasks'), {
+      ...payload,
+    });
   }
 
   return {
