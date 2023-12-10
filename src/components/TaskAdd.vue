@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
 
@@ -46,6 +46,11 @@ const newTask = ref({
 const title = ref(null);
 onMounted(() => {
   title.value?.$el.focus();
+})
+
+// Close dialog when after unmounting.
+onUnmounted(() => {
+  dialogRef.value.close();
 })
 
 // Save task to Firebase.
