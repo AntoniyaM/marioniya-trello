@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
 
@@ -40,6 +40,13 @@ const newTask = ref({
   description: '',
   status: 1,
 });
+
+// Set focus to title ref input manually.
+// (Due to limitations of HTML5 autofocus attr).
+const title = ref(null);
+onMounted(() => {
+  title.value?.$el.focus();
+})
 
 // Save task to Firebase.
 const saveTask = async () => {
