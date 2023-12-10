@@ -60,6 +60,7 @@ const openDialog = (header) => {
       blockScroll: true,
       dismissableMask: true,
       header,
+      modal: true,
     }
   });
 }
