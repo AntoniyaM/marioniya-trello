@@ -3,7 +3,7 @@
     <div class="board">
       <div class="board__title">
         <h1>Mario & Antoniya's Trello Board</h1>
-        <BaseButton icon="pi pi-plus" label="Create task" @click="addTask('add')" />
+        <BaseButton icon="pi pi-plus" label="Create task" @click="newTask" />
       </div>
       <div class="board__swim-lanes">
         <SwimLane
@@ -23,7 +23,7 @@
                   class="task"
                   v-for="task in getTasksByLane(item.id)"
                   :key="task.id"
-                  @click="openTask(task.id)"
+                  @click="editTask(task.id)"
               >
                 <div class="task__description">{{ task.description || '–' }}</div>
               </Panel>
@@ -52,20 +52,28 @@ const taskIsOpen = computed(() => {
   return router.currentRoute.value.name === 'task';
 });
 
-// Navigate to task (open in dialog).
-const openTask = (id) => {
-  router.push({ name: 'task', params: { id } });
+// Pass options to PrimeVue dialog.
+const openDialog = (header) => {
   dialog.open(RouterView, {
     onClose: closeOverlay,
+    props: {
+      blockScroll: true,
+      dismissableMask: true,
+      header,
+    }
   });
 }
 
-// Open new task form in dialog.
-const addTask = () => {
+// Navigate to task (opens in dialog).
+const editTask = (id) => {
+  router.push({ name: 'task', params: { id } });
+  openDialog('Edit task');
+}
+
+// Navigate to new task form (opens in dialog).
+const newTask = () => {
   router.push('/task/add');
-  dialog.open(RouterView, {
-    onClose: closeOverlay,
-  });
+  openDialog('Create task');
 }
 
 // Close open task.
@@ -79,8 +87,14 @@ onMounted(() => {
     router.push('/login');
   }
 
+  // When visiting /task/:id directly.
   if (taskIsOpen.value) {
-    openTask(router.currentRoute.value.params.id);
+    editTask(router.currentRoute.value.params.id);
+  }
+
+  // When visiting /task/add directly.
+  if (router.currentRoute.value.name === 'new-task') {
+    newTask();
   }
 });
 </script>

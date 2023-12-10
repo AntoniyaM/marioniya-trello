@@ -14,6 +14,7 @@ import DynamicDialog from 'primevue/dynamicdialog';
 import InputText from 'primevue/inputtext';
 import Panel from 'primevue/panel';
 import Password from 'primevue/password';
+import Textarea from 'primevue/textarea';
 
 import App from './App.vue';
 import router from './router';
@@ -36,5 +37,6 @@ app.component('DynamicDialog', DynamicDialog);
 app.component('InputText', InputText);
 app.component('Panel', Panel);
 app.component('InputPassword', Password);
+app.component('BaseTextarea', Textarea);
 
 app.mount('#app');

@@ -44,6 +44,7 @@ export const useBoardStore = defineStore('board', () => {
     swimLanes,
     tasks,
     getTasksByLane,
-    getTaskById
+    getTaskById,
+    createTask,
   }
 })
