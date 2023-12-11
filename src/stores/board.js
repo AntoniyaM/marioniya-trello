@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, doc, addDoc, updateDoc } from 'firebase/firestore';
 import { useFirestore, useCollection } from 'vuefire';
 import { defineStore } from 'pinia';
 
@@ -40,11 +40,19 @@ export const useBoardStore = defineStore('board', () => {
     });
   }
 
+  const updateTask = async (id, payload) => {
+    const task = doc(db, 'tasks', id);
+    if (task) {
+      await updateDoc(task, payload);
+    }
+  }
+
   return {
     swimLanes,
     tasks,
     getTasksByLane,
     getTaskById,
     createTask,
+    updateTask,
   }
 })

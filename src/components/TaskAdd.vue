@@ -48,7 +48,7 @@ onMounted(() => {
   title.value?.$el.focus();
 })
 
-// Close dialog when after unmounting.
+// Close dialog when unmounting.
 onUnmounted(() => {
   dialogRef.value.close();
 })

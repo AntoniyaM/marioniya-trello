@@ -47,6 +47,7 @@ const user = ref(await getCurrentUser());
 const router = useRouter();
 const { swimLanes, getTasksByLane } = useBoardStore();
 const dialog = useDialog();
+const emit = defineEmits(['after-hide']);
 
 const taskIsOpen = computed(() => {
   return router.currentRoute.value.name === 'task';
@@ -55,7 +56,12 @@ const taskIsOpen = computed(() => {
 // Pass options to PrimeVue dialog.
 const openDialog = (header) => {
   dialog.open(RouterView, {
-    onClose: closeOverlay,
+    onClose: () => {
+      // Todo: PrimeVue creates a new dialog on every open.
+      // Even manual 'after-hide' emit does not trigger garbage collection.
+      emit('after-hide');
+      router.push('/');
+    },
     props: {
       blockScroll: true,
       dismissableMask: true,
@@ -75,11 +81,6 @@ const editTask = (id) => {
 const newTask = () => {
   router.push('/task/add');
   openDialog('Create task');
-}
-
-// Close open task.
-const closeOverlay = () => {
-  router.push('/');
 }
 
 // If user is not logged in, redirect to login page.
