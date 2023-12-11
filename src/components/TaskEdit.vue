@@ -17,6 +17,11 @@
             label="Save changes"
             type="submit"
             :icon="`pi pi-${loading ? 'spinner' : 'check'}`" />
+        <BaseButton
+            label="Delete task"
+            severity="danger"
+            @click="removeTask"
+            :icon="`pi pi-${loading ? 'spinner' : 'times'}`" />
       </template>
     </Panel>
   </form>
@@ -27,7 +32,7 @@ import { ref, computed, inject, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
 
-const { getTaskById, updateTask } = useBoardStore();
+const { getTaskById, updateTask, deleteTask } = useBoardStore();
 const router = useRouter();
 const dialogRef = inject('dialogRef');
 
@@ -61,6 +66,19 @@ const saveTask = async () => {
   loading.value = true;
   try {
     await updateTask(task.value.id, updatedTask.value);
+    await router.push('/');
+    loading.value = false;
+    dialogRef.value.close();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// Remove task from Firebase.
+const removeTask = async () => {
+  loading.value = true;
+  try {
+    await deleteTask(task.value.id);
     await router.push('/');
     loading.value = false;
     dialogRef.value.close();

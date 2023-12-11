@@ -17,6 +17,11 @@
             label="Save task"
             type="submit"
             :icon="`pi pi-${loading ? 'spinner' : 'check'}`" />
+        <BaseButton
+            label="Cancel"
+            severity="danger"
+            @click="cancel"
+            :icon="`pi pi-${loading ? 'spinner' : 'times'}`" />
       </template>
     </Panel>
   </form>
@@ -66,5 +71,11 @@ const saveTask = async () => {
   } catch (e) {
     console.log(e);
   }
+}
+
+// Cancel.
+const cancel = () => {
+  router.push('/');
+  dialogRef.value.close();
 }
 </script>

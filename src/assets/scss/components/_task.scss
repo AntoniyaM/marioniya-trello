@@ -4,4 +4,25 @@
     &:not(:last-child) {
         margin-bottom: 1em;
     }
+
+    .p-panel-title {
+        color: var(--text-color);
+    }
+}
+
+// Make sure buttons are never 100% despite p-fluid class.
+.task-add,
+.task-edit {
+    .p-panel-footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .p-button {
+        max-width: 48%;
+
+        &:last-child {
+            margin-left: auto;
+        }
+    }
 }
