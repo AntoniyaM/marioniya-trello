@@ -1,5 +1,5 @@
 <template>
-  <Card class="login">
+  <ContentCard class="login">
     <template #title>Login</template>
     <template #content>
       <form @submit.prevent="login" class="form">
@@ -24,7 +24,7 @@
         </div>
       </form>
     </template>
-  </Card>
+  </ContentCard>
 </template>
 
 <script setup>

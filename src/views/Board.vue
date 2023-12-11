@@ -6,7 +6,7 @@
         <BaseButton icon="pi pi-plus" label="Create task" @click="newTask" />
       </div>
       <div class="board__swim-lanes">
-        <SwimLane
+        <ContentCard
             class="swim-lane"
             v-for="item in swimLanes"
             :key="item.id"
@@ -29,7 +29,7 @@
               </Panel>
             </div>
           </template>
-        </SwimLane>
+        </ContentCard>
       </div>
       <DynamicDialog :pt="{ mask: { style: 'backdrop-filter: blur(2px)' } }" />
     </div>

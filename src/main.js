@@ -32,7 +32,7 @@ app.use(DialogService);
 
 // Component registration.
 app.component('BaseButton', Button);
-app.component('SwimLane', Card);
+app.component('ContentCard', Card);
 app.component('DynamicDialog', DynamicDialog);
 app.component('InputText', InputText);
 app.component('Panel', Panel);
