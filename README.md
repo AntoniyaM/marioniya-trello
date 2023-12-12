@@ -2,6 +2,8 @@
 
 For chores around the house. 🧹🏡✨
 
+https://marioniya.netlify.app
+
 ## Project Setup
 
 ```sh
