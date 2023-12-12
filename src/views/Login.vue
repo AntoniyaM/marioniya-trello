@@ -51,8 +51,8 @@ onMounted(() => {
 
 const login = async () => {
   await signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
-      .then(() => {
-        router.push('/');
+      .then(async () => {
+        await router.push('/');
       })
       .catch((error) => {
         console.log(error);
