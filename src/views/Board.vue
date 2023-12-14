@@ -8,12 +8,15 @@
       <div class="board__swim-lanes">
         <ContentCard
             class="swim-lane"
-            v-for="item in swimLanes"
-            :key="item.id"
+            v-for="swimLane in swimLanes"
+            :key="swimLane.id"
+            @drop="dropTask($event, swimLane.id)"
+            @dragover.prevent
+            @dragenter.prevent
         >
           <template #header>
             <div class="swim-lane__name p-card-title">
-              {{ item.name }}
+              {{ swimLane.name }}
             </div>
           </template>
           <template #content>
@@ -21,8 +24,10 @@
               <Panel
                   :header="task.title"
                   class="task"
-                  v-for="task in getTasksByLane(item.id)"
+                  v-for="task in getTasksByLane(swimLane.id)"
                   :key="task.id"
+                  draggable="true"
+                  @dragstart="grabTask($event, task.id, swimLane.id)"
                   @click="editTask(task.id)"
               >
                 <div class="task__description">{{ task.description || '–' }}</div>
@@ -45,7 +50,7 @@ import { useDialog } from 'primevue/usedialog';
 
 const user = ref(await getCurrentUser());
 const router = useRouter();
-const { swimLanes, getTasksByLane } = useBoardStore();
+const { swimLanes, getTasksByLane, updateTask } = useBoardStore();
 const dialog = useDialog();
 const emit = defineEmits(['after-hide']);
 
@@ -81,6 +86,29 @@ const editTask = (id) => {
 const newTask = () => {
   router.push('/task/add');
   openDialog('Create task');
+}
+
+// Logic related to Draggable API.
+// Todo: extract into a mixin or helper util.
+const grabTask = (e, taskId, swimLaneId) => {
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.dropEffect = 'move';
+  e.dataTransfer.setData('task-id', taskId);
+  e.dataTransfer.setData('current-status', swimLaneId);
+}
+
+const dropTask = async (e, targetSwimLaneId) => {
+  const taskId = e.dataTransfer.getData('task-id');
+  const sourceSwimLaneId = e.dataTransfer.getData('current-status');
+
+  // Do the update only if the task status is actually changed.
+  if (sourceSwimLaneId !== targetSwimLaneId) {
+    try {
+      await updateTask(taskId, { status: targetSwimLaneId });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 // If user is not logged in, redirect to login page.
