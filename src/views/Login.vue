@@ -30,7 +30,7 @@
 <script setup>
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getCurrentUser, useFirebaseAuth } from 'vuefire';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 
 const userInput = ref({
@@ -51,8 +51,10 @@ onMounted(() => {
 
 const login = async () => {
   await signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
-      .then(async () => {
-        await router.push('/');
+      .then(() => {
+        nextTick(async () => {
+          await router.push('/');
+        })
       })
       .catch((error) => {
         console.log(error);

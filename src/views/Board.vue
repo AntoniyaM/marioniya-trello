@@ -48,9 +48,9 @@ import { useRouter, RouterView } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
 import { useDialog } from 'primevue/usedialog';
 
+const { swimLanes, getTasksByLane, updateTask } = useBoardStore();
 const user = ref(await getCurrentUser());
 const router = useRouter();
-const { swimLanes, getTasksByLane, updateTask } = useBoardStore();
 const dialog = useDialog();
 const emit = defineEmits(['after-hide']);
 
