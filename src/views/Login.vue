@@ -8,7 +8,7 @@
           <InputText
               id="email"
               v-model="userInput.email"
-              placeholder="shrimply.pibbles@pieceamongworlds.com"
+              placeholder="shrimply.pibbles@peaceamongworlds.com"
               required />
         </div>
         <div class="form-item">
