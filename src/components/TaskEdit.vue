@@ -8,10 +8,20 @@
             placeholder="Enter task title"
             required />
       </template>
-      <BaseTextarea
+      <TextEditor
           v-model="updatedTask.description"
           placeholder="Enter task description"
-          rows="8" />
+          editorStyle="height: 180px"
+      >
+        <template v-slot:toolbar>
+          <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+          </span>
+        </template>
+      </TextEditor>
       <template #footer>
         <BaseButton
             label="Save changes"

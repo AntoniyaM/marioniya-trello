@@ -30,7 +30,7 @@
                   @dragstart="grabTask($event, task.id, swimLane.id)"
                   @click="editTask(task.id)"
               >
-                <div class="task__description">{{ task.description || '–' }}</div>
+                <div class="task__description" v-html="task.description || '–'"></div>
               </Panel>
             </div>
           </template>

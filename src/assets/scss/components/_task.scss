@@ -10,6 +10,18 @@
     }
 }
 
+.task__description {
+    p, ul, ol {
+        margin: 0;
+    }
+
+    // Show ellipsis after 3 lines.
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 // Make sure buttons are never 100% despite p-fluid class.
 .task-add,
 .task-edit {
