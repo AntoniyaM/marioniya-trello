@@ -32,6 +32,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getCurrentUser, useFirebaseAuth } from 'vuefire';
 import { ref, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
+import { useBoardStore } from '@/stores/board';
 
 const userInput = ref({
   email: '',
@@ -53,6 +54,8 @@ const login = async () => {
   await signInWithEmailAndPassword(auth, userInput.value.email, userInput.value.password)
       .then(() => {
         nextTick(async () => {
+          const { refreshStore } = useBoardStore();
+          refreshStore();
           await router.push('/');
         })
       })

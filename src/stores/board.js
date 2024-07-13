@@ -22,7 +22,7 @@ export const useBoardStore = defineStore('board', () => {
 
   // Firebase data.
   const db = useFirestore();
-  const tasks = useCollection(collection(db, 'tasks'));
+  let tasks = useCollection(collection(db, 'tasks'));
 
   // Getters.
   const getTasksByLane = (laneId) => {
@@ -54,6 +54,10 @@ export const useBoardStore = defineStore('board', () => {
     }
   }
 
+  const refreshStore = () => {
+    tasks = useCollection(collection(db, 'tasks'));
+  }
+
   return {
     swimLanes,
     tasks,
@@ -62,5 +66,6 @@ export const useBoardStore = defineStore('board', () => {
     createTask,
     updateTask,
     deleteTask,
+    refreshStore,
   }
 })
