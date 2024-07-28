@@ -26,7 +26,10 @@ export const useBoardStore = defineStore('board', () => {
 
   // Getters.
   const getTasksByLane = (laneId) => {
-    return tasks.value.filter((task) => task.status === laneId);
+    // Also sort tasks by pinned status.
+    return tasks.value
+      .filter((task) => task.status === laneId)
+      .sort((a, b) => b.isPinned - a.isPinned);
   }
 
   const getTaskById = (id) => {

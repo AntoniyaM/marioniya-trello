@@ -4,7 +4,7 @@
       <span class="navbar__info">
         <strong>{{ user.email }}</strong>
       </span>
-      <BaseButton label="Log out" @click="logout" />
+      <BaseButton label="Log out" raised @click="logout" />
     </template>
     <RouterLink v-else to="/login" class="p-button">
       <i class="pi pi-user"></i>

@@ -3,7 +3,7 @@
     <div class="board">
       <div class="board__title">
         <h1>Mario & Antoniya's Trello Board</h1>
-        <BaseButton icon="pi pi-plus" label="Create task" @click="newTask" />
+        <BaseButton icon="pi pi-plus" label="Create task" raised @click="newTask" />
       </div>
       <div class="board__swim-lanes">
         <ContentCard
@@ -22,7 +22,6 @@
           <template #content>
             <div class="swim-lane__task-list">
               <Panel
-                  :header="task.title"
                   class="task"
                   v-for="task in getTasksByLane(swimLane.id)"
                   :key="task.id"
@@ -30,6 +29,12 @@
                   @dragstart="grabTask($event, task.id, swimLane.id)"
                   @click="editTask(task.id)"
               >
+                <template #header>
+                  <div class="p-panel-title">{{ task.title}}</div>
+                </template>
+                <template #icons>
+                  <BaseButton icon="pi pi-thumbtack" rounded :text="!task.isPinned" raised @click.stop="pinTask(task.id)" />
+                </template>
                 <div class="task__description" v-html="task.description || '–'"></div>
               </Panel>
             </div>
@@ -48,7 +53,8 @@ import { useRouter, RouterView } from 'vue-router';
 import { useBoardStore } from '@/stores/board';
 import { useDialog } from 'primevue/usedialog';
 
-const { swimLanes, getTasksByLane, updateTask } = useBoardStore();
+// Data.
+const { swimLanes, getTasksByLane, getTaskById, updateTask } = useBoardStore();
 const user = ref(await getCurrentUser());
 const router = useRouter();
 const dialog = useDialog();
@@ -58,6 +64,7 @@ const taskIsOpen = computed(() => {
   return router.currentRoute.value.name === 'task';
 });
 
+// Methods.
 // Pass options to PrimeVue dialog.
 const openDialog = (header) => {
   dialog.open(RouterView, {
@@ -80,6 +87,12 @@ const openDialog = (header) => {
 const editTask = (id) => {
   router.push({ name: 'task', params: { id } });
   openDialog('Edit task');
+}
+
+// Pin/unpin task.
+const pinTask = async (taskId) => {
+  const task = getTaskById(taskId);
+  await updateTask(taskId, { ...task, isPinned: !task.isPinned });
 }
 
 // Navigate to new task form (opens in dialog).
@@ -111,8 +124,9 @@ const dropTask = async (e, targetSwimLaneId) => {
   }
 }
 
-// If user is not logged in, redirect to login page.
+// Mounted.
 onMounted(() => {
+  // If user is not logged in, redirect to login page.
   if (!user.value?.email) {
     router.push('/login');
   }

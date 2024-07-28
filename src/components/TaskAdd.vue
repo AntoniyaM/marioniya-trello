@@ -54,6 +54,7 @@ const newTask = ref({
   title: '',
   description: '',
   status: 1,
+  isPinned: false,
 });
 
 // Set focus to title ref input manually.
