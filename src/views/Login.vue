@@ -20,7 +20,7 @@
               required />
         </div>
         <div class="form-item form-item--submit">
-          <input type="submit" class="p-button" value="Log in">
+          <BaseButton raised type="submit" label="Log in" />
         </div>
       </form>
     </template>

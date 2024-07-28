@@ -6,10 +6,7 @@
       </span>
       <BaseButton label="Log out" raised @click="logout" />
     </template>
-    <RouterLink v-else to="/login" class="p-button">
-      <i class="pi pi-user"></i>
-      Log in
-    </RouterLink>
+    <BaseButton v-else as="router-link" icon="pi pi-user" raised label="Log in" to="/login" />
   </div>
 </template>
 

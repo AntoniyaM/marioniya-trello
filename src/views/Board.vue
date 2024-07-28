@@ -33,7 +33,13 @@
                   <div class="p-panel-title">{{ task.title}}</div>
                 </template>
                 <template #icons>
-                  <BaseButton icon="pi pi-thumbtack" rounded :text="!task.isPinned" raised @click.stop="pinTask(task.id)" />
+                  <BaseButton
+                    icon="pi pi-thumbtack"
+                    rounded
+                    :text="!task.isPinned"
+                    raised
+                    v-tooltip="`${task.isPinned ? 'Unpin' : 'Pin'} this task.`"
+                    @click.stop="pinTask(task.id)" />
                 </template>
                 <div class="task__description" v-html="task.description || '–'"></div>
               </Panel>

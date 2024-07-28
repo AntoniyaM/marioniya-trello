@@ -16,6 +16,7 @@ import InputText from 'primevue/inputtext';
 import Panel from 'primevue/panel';
 import Password from 'primevue/password';
 import Textarea from 'primevue/textarea';
+import Tooltip from 'primevue/tooltip';
 
 import App from './App.vue';
 import router from './router';
@@ -30,6 +31,7 @@ app.use(VueFire, {
 });
 app.use(PrimeVue, { ripple: true });
 app.use(DialogService);
+app.directive('tooltip', Tooltip);
 
 // Component registration.
 app.component('BaseButton', Button);
