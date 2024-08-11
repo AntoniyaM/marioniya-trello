@@ -20,7 +20,7 @@
               required />
         </div>
         <div class="form-item form-item--submit">
-          <BaseButton raised type="submit" label="Log in" />
+          <BaseButton raised type="submit" label="Log in" :disabled="!userInput.email || !userInput.password" />
         </div>
       </form>
     </template>
