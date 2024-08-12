@@ -14,7 +14,7 @@
         <div class="form-item">
           <label for="password">Password</label>
           <InputPassword
-              id="password"
+              input-id="password"
               v-model="userInput.password"
               :feedback="false"
               required />
