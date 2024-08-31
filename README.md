@@ -1,8 +1,10 @@
-# Mario & Antoniya's Trello
+# Mario & Antoniya's Trello Board
 
 For chores around the house. 🧹🏡✨
 
 https://marioniya.netlify.app
+
+![screenshot.png](public/screenshot.png)
 
 ## Project Setup
 
