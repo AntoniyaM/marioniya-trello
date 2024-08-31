@@ -2,7 +2,7 @@
 
 For chores around the house. 🧹🏡✨
 
-https://marioniya.netlify.app
+https://marioniya.space
 
 ![screenshot.png](public/screenshot.png)
 
