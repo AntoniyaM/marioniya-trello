@@ -5,8 +5,14 @@
         margin-bottom: 1em;
     }
 
+    .p-panel-header {
+        padding-block: 1rem;
+        gap: 0.4rem;
+    }
+
     .p-panel-title {
         color: var(--text-color);
+        font-weight: 600;
     }
 
     .p-button-icon {
@@ -23,6 +29,7 @@
     ul, ol {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        padding: 0;
 
         // Show ellipsis if the list item text is too long.
         // Move the bullets to the inside because text-overflow would otherwise hide them.
@@ -50,4 +57,9 @@
             margin-left: auto;
         }
     }
+}
+
+// Tooltip text looks too big to me.
+.p-tooltip-text {
+    font-size: 0.75rem;
 }
