@@ -8,6 +8,7 @@ body {
     margin: 0;
     background: var(--highlight-bg);
     color: var(--text-color);
+    font-family: $font-family;
 }
 
 h1 {
@@ -27,4 +28,9 @@ img {
     display: block;
     width: 100%;
     height: auto;
+}
+
+// Make sure PrimeVue components are using the correct font.
+.p-component {
+    font-family: $font-family;
 }
