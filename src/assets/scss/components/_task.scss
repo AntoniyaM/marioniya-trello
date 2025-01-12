@@ -1,65 +1,68 @@
 .task {
-    cursor: pointer;
+  cursor: pointer;
 
-    &:not(:last-child) {
-        margin-bottom: 1em;
-    }
+  &:not(:last-child) {
+    margin-bottom: 1em;
+  }
 
-    .p-panel-header {
-        padding-block: 1rem;
-        gap: 0.4rem;
-    }
+  .p-panel-header {
+    padding-block: 1rem;
+    gap: 0.4rem;
+  }
 
-    .p-panel-title {
-        color: var(--text-color);
-        font-weight: 600;
-    }
+  .p-panel-title {
+    color: var(--text-color);
+    font-weight: 600;
+  }
 
-    .p-button-icon {
-        rotate: 30deg;
-    }
+  .p-button-icon {
+    rotate: 30deg;
+  }
 }
 
 .task__description {
-    p, ul, ol {
-        margin: 0;
-    }
+  p,
+  ul,
+  ol {
+    margin: 0;
+  }
 
-    // Display list items in two columns to save space on the board.
-    ul, ol {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 0;
+  // Display list items in two columns to save space on the board.
+  ul,
+  ol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
 
-        // Show ellipsis if the list item text is too long.
-        // Move the bullets to the inside because text-overflow would otherwise hide them.
-        li {
-            list-style-position: inside;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    // Show ellipsis if the list item text is too long.
+    // Move the bullets to the inside because text-overflow would otherwise hide them.
+    li {
+      list-style-position: inside;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+  }
 }
 
 // Make sure buttons are never 100% despite p-fluid class.
 .task-add,
 .task-edit {
-    .p-panel-footer {
-        display: flex;
-        justify-content: space-between;
-    }
+  .p-panel-footer {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .p-button {
-        max-width: 48%;
+  .p-button {
+    max-width: 48%;
 
-        &:last-child {
-            margin-left: auto;
-        }
+    &:last-child {
+      margin-left: auto;
     }
+  }
 }
 
 // Tooltip text looks too big to me.
 .p-tooltip-text {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
 }

@@ -1,15 +1,15 @@
 .form-item {
-    &:not(.form-item--submit) {
-        margin-bottom: 1em;
-    }
+  &:not(.form-item--submit) {
+    margin-bottom: 1em;
+  }
 
-    // Let PrimeVue inputs take all available space.
-    .p-component {
-        width: 100%;
-    }
+  // Let PrimeVue inputs take all available space.
+  .p-component {
+    width: 100%;
+  }
 }
 
 label {
-    display: block;
-    margin-bottom: 0.5em;
+  display: block;
+  margin-bottom: 0.5em;
 }

@@ -1,47 +1,47 @@
 .board__title {
-    padding-bottom: 1em;
+  padding-bottom: 1em;
+
+  @include bp(m) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Create task button.
+  button {
+    margin-top: 1em;
 
     @include bp(m) {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      margin-top: 0;
     }
-
-    // Create task button.
-    button {
-        margin-top: 1em;
-
-        @include bp(m) {
-            margin-top: 0;
-        }
-    }
+  }
 }
 
 .board__swim-lanes {
-    @include bp(m) {
-        display: flex;
-        gap: 1em;
-    }
+  @include bp(m) {
+    display: flex;
+    gap: 1em;
+  }
 }
 
 .swim-lane {
-    margin-bottom: 1em;
-    overflow: hidden;
+  margin-bottom: 1em;
+  overflow: hidden;
 
-    @include bp(m) {
-        margin-bottom: 0;
-        flex: 1 0;
-    }
+  @include bp(m) {
+    margin-bottom: 0;
+    flex: 1 0;
+  }
 
-    // Remove superfluous padding coming from VuePrime.
-    .p-card-content {
-        padding: 0;
-    }
+  // Remove superfluous padding coming from VuePrime.
+  .p-card-content {
+    padding: 0;
+  }
 }
 
 .swim-lane__name {
-    // Use the same spacer as the rest of the card parts.
-    padding: 1.25rem;
-    margin-bottom: 0;
-    background: var(--primary-50);
+  // Use the same spacer as the rest of the card parts.
+  padding: 1.25rem;
+  margin-bottom: 0;
+  background: var(--primary-50);
 }
